@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regenerate Vilimalé — Our Plan, Our Islands, Our Future</title>
+  <meta name="description" content="The National Development Plan promises a Maldives that restores its environment. Vilimalé's FunaVaa is where that promise is being tested.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Design Tokens ===== */
+    :root {
+      --green-deep: #1a3a2a;
+      --green-forest: #2d5e3f;
+      --green-canopy: #3e7a52;
+      --green-leaf: #5a9e6f;
+      --green-soft: #8fc4a0;
+      --green-mist: #c5e1cd;
+      --green-pale: #e8f3ec;
+
+      --ocean-deep: #1a3344;
+      --ocean-mid: #2a6485;
+      --ocean-light: #5ba3c9;
+      --ocean-foam: #a8d8ea;
+
+      --sand-warm: #d4a96a;
+      --sand-light: #e8d5b5;
+      --sand-pale: #f5efe4;
+      --sand-white: #faf7f2;
+
+      --earth-dark: #5c3d2e;
+      --earth-mid: #8b6544;
+
+      --text-primary: #1a2e22;
+      --text-secondary: #3d5a47;
+      --text-muted: #6b8a74;
+      --text-on-dark: #e8f3ec;
+      --text-on-dark-muted: #a8c8b4;
+
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Lora', Georgia, serif;
+
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+      --space-3xl: 8rem;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 32px;
+
+      --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      background: var(--sand-white);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== Scroll Animations ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in, .fade-in-left {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-lg);
+      overflow: hidden;
+      background: linear-gradient(
+        160deg,
+        var(--green-deep) 0%,
+        var(--green-forest) 30%,
+        var(--ocean-deep) 70%,
+        #0f2a38 100%
+      );
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 80%, rgba(90, 158, 111, 0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 500px at 80% 20%, rgba(42, 100, 133, 0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 300px 300px at 50% 50%, rgba(212, 169, 106, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero__leaves {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero__leaf {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+      opacity: 0.04;
+      background: var(--green-leaf);
+    }
+
+    .hero__leaf:nth-child(1) { top: 10%; left: 5%; width: 180px; height: 180px; transform: rotate(-25deg); }
+    .hero__leaf:nth-child(2) { top: 60%; right: 8%; width: 140px; height: 140px; transform: rotate(40deg); }
+    .hero__leaf:nth-child(3) { bottom: 15%; left: 15%; width: 100px; height: 100px; transform: rotate(15deg); }
+    .hero__leaf:nth-child(4) { top: 25%; right: 20%; width: 90px; height: 90px; transform: rotate(-50deg); }
+    .hero__leaf:nth-child(5) { bottom: 30%; right: 30%; width: 160px; height: 160px; transform: rotate(70deg); opacity: 0.03; }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero__label {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green-soft);
+      margin-bottom: var(--space-md);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s forwards;
+    }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--sand-white);
+      margin-bottom: var(--space-md);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+
+    .hero__title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--green-soft), var(--ocean-foam));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero__subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--text-on-dark-muted);
+      max-width: 600px;
+      margin: 0 auto var(--space-lg);
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s forwards;
+    }
+
+    .hero__scroll-hint {
+      opacity: 0;
+      animation: fadeUp 0.8s 1s forwards;
+    }
+
+    .hero__scroll-hint span {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: var(--text-on-dark-muted);
+      margin-bottom: var(--space-xs);
+    }
+
+    .hero__scroll-arrow {
+      display: block;
+      width: 24px;
+      height: 24px;
+      margin: 0 auto;
+      border-right: 2px solid var(--green-soft);
+      border-bottom: 2px solid var(--green-soft);
+      transform: rotate(45deg);
+      animation: bounceDown 2s infinite;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounceDown {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50% { transform: rotate(45deg) translateY(8px); }
+    }
+
+    /* ===== Container ===== */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    /* ===== Context Section ===== */
+    .context {
+      padding: var(--space-3xl) 0 var(--space-2xl);
+      background: var(--sand-white);
+    }
+
+    .context__intro {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      text-align: center;
+    }
+
+    .context__intro strong {
+      color: var(--green-forest);
+      font-weight: 600;
+    }
+
+    .context__ndp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      margin-top: var(--space-lg);
+      padding: 0.6rem 1.2rem;
+      background: var(--green-pale);
+      border: 1px solid var(--green-mist);
+      border-radius: var(--radius-xl);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--green-forest);
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      transition: background var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+    }
+
+    .context__ndp-badge:hover {
+      background: var(--green-mist);
+      border-color: var(--green-canopy);
+      transform: translateY(-2px);
+    }
+
+    .context__divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-canopy), var(--ocean-mid));
+      border: none;
+      border-radius: 2px;
+      margin: var(--space-2xl) auto var(--space-xl);
+    }
+
+    /* ===== Argument Sections ===== */
+    .arguments {
+      padding-bottom: var(--space-2xl);
+    }
+
+    .argument {
+      padding: var(--space-xl) 0;
+      border-bottom: 1px solid var(--green-mist);
+    }
+
+    .argument:last-child {
+      border-bottom: none;
+    }
+
+    .argument__number {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-sm);
+    }
+
+    .argument__icon {
+      font-size: 1.6rem;
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+
+    .argument__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      color: var(--green-deep);
+      line-height: 1.25;
+      margin-bottom: var(--space-md);
+    }
+
+    .argument__body {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      margin-bottom: var(--space-lg);
+    }
+
+    .argument__quote {
+      position: relative;
+      padding: var(--space-md) var(--space-lg);
+      background: linear-gradient(135deg, var(--green-pale), rgba(200, 225, 210, 0.4));
+      border-left: 4px solid var(--green-canopy);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--green-deep);
+      line-height: 1.8;
+    }
+
+    .argument__quote::before {
+      content: '\201C';
+      position: absolute;
+      top: -10px;
+      left: 12px;
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--green-canopy);
+      opacity: 0.2;
+      line-height: 1;
+    }
+
+    .argument__source {
+      display: block;
+      margin-top: var(--space-sm);
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-style: normal;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== Vision Banner ===== */
+    .vision {
+      position: relative;
+      padding: var(--space-3xl) var(--space-lg);
+      background: linear-gradient(
+        160deg,
+        var(--green-forest) 0%,
+        var(--green-canopy) 40%,
+        var(--ocean-mid) 100%
+      );
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .vision::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 400px 300px at 30% 70%, rgba(143, 196, 160, 0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 350px 350px at 70% 30%, rgba(168, 216, 234, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .vision__content {
+      position: relative;
+      z-index: 1;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .vision__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: var(--sand-white);
+      line-height: 1.35;
+      margin-bottom: var(--space-lg);
+    }
+
+    .vision__text {
+      font-size: 1.1rem;
+      color: var(--text-on-dark-muted);
+      line-height: 1.9;
+    }
+
+    .vision__text strong {
+      color: var(--sand-white);
+      font-weight: 600;
+    }
+
+    /* ===== CTA Section ===== */
+    .cta {
+      padding: var(--space-3xl) var(--space-lg);
+      background: var(--sand-pale);
+      text-align: center;
+    }
+
+    .cta__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-weight: 800;
+      color: var(--green-deep);
+      margin-bottom: var(--space-sm);
+    }
+
+    .cta__subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xl);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Share Buttons */
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: var(--radius-xl);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      text-decoration: none;
+      color: white;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .share-btn:active {
+      transform: translateY(0);
+    }
+
+    .share-btn--whatsapp { background: #25D366; }
+    .share-btn--copy { background: var(--green-forest); }
+    .share-btn--twitter { background: #1DA1F2; }
+    .share-btn--facebook { background: #1877F2; }
+
+    .share-btn__icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* Support Form */
+    .support {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: var(--space-lg);
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 4px 24px rgba(26, 58, 42, 0.08);
+    }
+
+    .support__label {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--green-deep);
+      margin-bottom: var(--space-xs);
+    }
+
+    .support__statement {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: var(--space-md);
+      font-style: italic;
+    }
+
+    .support__input-row {
+      display: flex;
+      gap: var(--space-xs);
+    }
+
+    .support__input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--green-mist);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      background: var(--sand-white);
+      transition: border-color var(--transition-base);
+    }
+
+    .support__input:focus {
+      outline: none;
+      border-color: var(--green-canopy);
+    }
+
+    .support__input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .support__btn {
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, var(--green-forest), var(--green-canopy));
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      white-space: nowrap;
+    }
+
+    .support__btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(45, 94, 63, 0.3);
+    }
+
+    .support__count {
+      margin-top: var(--space-md);
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .support__count strong {
+      color: var(--green-forest);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .support__thanks {
+      display: none;
+      padding: var(--space-md);
+      text-align: center;
+    }
+
+    .support__thanks.show {
+      display: block;
+    }
+
+    .support__thanks-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    .support__thanks-text {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--green-forest);
+    }
+
+    .support__form.hidden {
+      display: none;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      padding: var(--space-xl) var(--space-lg);
+      background: var(--green-deep);
+      text-align: center;
+    }
+
+    .footer__source {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: var(--text-on-dark-muted);
+      line-height: 1.7;
+    }
+
+    .footer__source strong {
+      color: var(--sand-light);
+      font-weight: 600;
+    }
+
+    .footer__note {
+      margin-top: var(--space-sm);
+      font-size: 0.78rem;
+      color: rgba(168, 200, 180, 0.6);
+      font-style: italic;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 600px) {
+      .hero {
+        padding: var(--space-lg) var(--space-sm);
+      }
+
+      .argument__quote {
+        padding: var(--space-sm) var(--space-md);
+      }
+
+      .support__input-row {
+        flex-direction: column;
+      }
+
+      .share-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .share-btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+    }
+
+    /* ===== Toast notification ===== */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--green-deep);
+      color: var(--sand-white);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-xl);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      z-index: 1000;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Hero ===== -->
+  <header class="hero" id="hero">
+    <div class="hero__leaves" aria-hidden="true">
+      <div class="hero__leaf"></div>
+      <div class="hero__leaf"></div>
+      <div class="hero__leaf"></div>
+      <div class="hero__leaf"></div>
+      <div class="hero__leaf"></div>
+    </div>
+    <div class="hero__content">
+      <p class="hero__label">Vilimalé's FunaVaa</p>
+      <h1 class="hero__title"><em>Regenerate,</em><br>Don't Degrade.</h1>
+      <p class="hero__subtitle">
+        The National Development Plan promises a Maldives that restores its environment&nbsp;— not one that strips it away. Vilimalé's FunaVaa is where that promise is being tested.
+      </p>
+      <div class="hero__scroll-hint">
+        <span>Scroll to learn more</span>
+        <i class="hero__scroll-arrow" aria-hidden="true"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Context ===== -->
+  <section class="context" id="context">
+    <div class="container">
+      <p class="context__intro fade-in">
+        Vilimalé's FunaVaa is one of the last green spaces in a rapidly densifying island. The proposal to remove its old trees for housing isn't just about trees&nbsp;— it's about <strong>what kind of development we choose.</strong>
+        <br><br>
+        The government's own National Development Plan&nbsp;— <em>Resilient Maldives 2045</em>&nbsp;— has already answered that question. It calls for development that <strong>regenerates natural capital</strong>, not development that destroys it. Here's what the plan actually says.
+      </p>
+      <div style="text-align:center;">
+        <a href="ndp zero draft.docx" download class="context__ndp-badge fade-in" title="Download the full NDP Zero Draft docx">📄 Source: Resilient Maldives 2045 — NDP Zero Draft, January 2026 ↓</a>
+      </div>
+      <hr class="context__divider">
+    </div>
+  </section>
+
+  <!-- ===== Arguments ===== -->
+  <section class="arguments" id="arguments">
+    <div class="container">
+
+      <!-- Argument 1 -->
+      <article class="argument fade-in">
+        <span class="argument__icon" aria-hidden="true">🌿</span>
+        <p class="argument__number">Argument 01</p>
+        <h2 class="argument__title">Nature Is Our Infrastructure — The Plan Says So</h2>
+        <p class="argument__body">
+          The NDP doesn't treat ecosystems as nice-to-haves. It classifies them as <strong>critical infrastructure</strong>&nbsp;— the same category as seawalls and roads. Removing old trees for housing is like demolishing a seawall to build apartments. The plan treats these as the same kind of asset.
+        </p>
+        <blockquote class="argument__quote">
+          Natural ecosystems function as critical infrastructure. Coral reefs, mangroves, wetlands, and freshwater lenses protect coastlines, regulate climate impacts, support livelihoods, safeguard health, housing, and infrastructure, and underpin tourism and fisheries.
+          <cite class="argument__source">— NDP Zero Draft, Chapter 2 / Part A</cite>
+        </blockquote>
+      </article>
+
+      <!-- Argument 2 -->
+      <article class="argument fade-in">
+        <span class="argument__icon" aria-hidden="true">🚫</span>
+        <p class="argument__number">Argument 02</p>
+        <h2 class="argument__title">The Plan Drew a Line — Degradation Is Off the Table</h2>
+        <p class="argument__body">
+          The NDP's Vision chapter includes a list of paths the Maldives will <strong>deliberately not take</strong>. Destroying natural capital is explicitly on that list. This isn't a suggestion&nbsp;— it's a national commitment. Removing old trees is precisely the kind of "maladaptive investment" the plan says we will avoid.
+        </p>
+        <blockquote class="argument__quote">
+          It clarifies the long-term model the Maldives is choosing and the paths it will deliberately avoid: ... development that destroys natural capital and future habitability...
+          <cite class="argument__source">— NDP Zero Draft, Chapter 1 (Vision) / Part A</cite>
+        </blockquote>
+      </article>
+
+      <!-- Argument 3 -->
+      <article class="argument fade-in">
+        <span class="argument__icon" aria-hidden="true">⚖️</span>
+        <p class="argument__number">Argument 03</p>
+        <h2 class="argument__title">Ecological Limits Aren't Optional — They're the Foundation</h2>
+        <p class="argument__body">
+          The NDP describes ecological limits as <strong>binding constraints</strong> on all development&nbsp;— not aspirational goals, not suggestions. This applies to housing just as much as tourism or industry. The plan makes no exceptions.
+        </p>
+        <blockquote class="argument__quote">
+          Implementation is governed by safeguards that protect long-term viability and coherence, including ecological limits treated as binding constraints on development.
+          <cite class="argument__source">— NDP Zero Draft, Pillar IV / Safeguards, Part D</cite>
+        </blockquote>
+      </article>
+
+      <!-- Argument 4 -->
+      <article class="argument fade-in">
+        <span class="argument__icon" aria-hidden="true">🔄</span>
+        <p class="argument__number">Argument 04</p>
+        <h2 class="argument__title">You Can Rebuild a House. You Can't Regrow Decades.</h2>
+        <p class="argument__body">
+          The NDP specifically warns that crossing ecological thresholds causes damage that <strong>cannot be undone</strong>. Old trees are irreplaceable. A sapling planted in their place won't restore their ecological function for decades&nbsp;— if ever. A housing block can be built elsewhere or designed differently. An old-growth tree cannot.
+        </p>
+        <blockquote class="argument__quote">
+          Once ecological thresholds are crossed, restoration may be impossibly costly or even irreversible. Under these conditions, thoughtful choices in long-term development are a necessity.
+          <cite class="argument__source">— NDP Zero Draft, Chapter 2 / Part A</cite>
+        </blockquote>
+      </article>
+
+      <!-- Argument 5 -->
+      <article class="argument fade-in">
+        <span class="argument__icon" aria-hidden="true">🏗️</span>
+        <p class="argument__number">Argument 05</p>
+        <h2 class="argument__title">Smarter Housing, Greener Islands — That's the Plan</h2>
+        <p class="argument__body">
+          The NDP already has an answer for housing pressure, and it isn't "cut down trees." The plan calls for <strong>land-use efficiency, densification, and modern construction methods</strong>. Housing affordability and environmental vulnerability are named together as symptoms of the same problem&nbsp;— not as competing priorities.
+        </p>
+        <blockquote class="argument__quote">
+          This Framework emphasises land-use efficiency and spatially informed investment decisions.
+          <cite class="argument__source">— NDP Zero Draft, Pillar II / Land Use, Part D</cite>
+        </blockquote>
+      </article>
+
+      <!-- Argument 6 -->
+      <article class="argument fade-in">
+        <span class="argument__icon" aria-hidden="true">🗣️</span>
+        <p class="argument__number">Argument 06</p>
+        <h2 class="argument__title">10,000 Voices Already Chose Regeneration</h2>
+        <p class="argument__body">
+          This isn't just expert opinion. The NDP was built on <strong>over 10,000 voices</strong> from public consultations. Maldivians&nbsp;— especially younger generations&nbsp;— expressed a strong desire to preserve the natural character of their islands. Removing old trees acts against the democratic foundation of the very plan it claims to implement.
+        </p>
+        <blockquote class="argument__quote">
+          Many citizens – particularly younger generations – express a strong desire to preserve the 'island character' of their communities, including natural coastlines, lagoons, and living spaces that define island life.
+          <cite class="argument__source">— NDP Zero Draft, Chapter 2 / Part A</cite>
+        </blockquote>
+      </article>
+
+      <!-- Argument 7 -->
+      <article class="argument fade-in">
+        <span class="argument__icon" aria-hidden="true">🌱</span>
+        <p class="argument__number">Argument 07</p>
+        <h2 class="argument__title">What Are We Growing for the Next Generation?</h2>
+        <p class="argument__body">
+          The NDP places <strong>intergenerational equity</strong> at its ethical core. Today's decisions must not deprive future generations of natural assets. Old trees are intergenerational assets&nbsp;— inherited from previous generations and owed to the next. Felling them for short-term housing is a violation of the NDP's core ethical framework.
+        </p>
+        <blockquote class="argument__quote">
+          Intergenerational equity is ensured through the conservation of options, quality, and access for current and future generations. It covers natural resources and biodiversity, climate and the atmosphere, wellbeing, economic and fiscal stability.
+          <cite class="argument__source">— NDP Zero Draft, Chapter 1 / Part A</cite>
+        </blockquote>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== Vision Banner ===== -->
+  <section class="vision" id="vision">
+    <div class="vision__content fade-in">
+      <h2 class="vision__title">Imagine a Different Future for Vilimalé</h2>
+      <p class="vision__text">
+        Imagine Vilimalé where green spaces <strong>grow, not shrink.</strong> Where housing is <strong>smarter, not sprawling.</strong> Where every development decision moves us closer to 2045, not further away.
+        <br><br>
+        That's not a dream&nbsp;— <strong>it's the plan.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta" id="cta">
+    <div class="container">
+      <h2 class="cta__title fade-in">Choose Regeneration</h2>
+      <p class="cta__subtitle fade-in">Share this page and add your voice.</p>
+
+      <!-- Share Buttons -->
+      <div class="share-buttons fade-in" id="shareButtons">
+        <a class="share-btn share-btn--whatsapp" id="shareWhatsApp" href="#" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+          <svg class="share-btn__icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <button class="share-btn share-btn--copy" id="shareCopy" aria-label="Copy link">
+          <svg class="share-btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy Link
+        </button>
+        <a class="share-btn share-btn--twitter" id="shareTwitter" href="#" target="_blank" rel="noopener" aria-label="Share on X / Twitter">
+          <svg class="share-btn__icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X / Twitter
+        </a>
+        <a class="share-btn share-btn--facebook" id="shareFacebook" href="#" target="_blank" rel="noopener" aria-label="Share on Facebook">
+          <svg class="share-btn__icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+      </div>
+
+      <!-- Symbolic Support -->
+      <div class="support fade-in" id="supportCard">
+        <p class="support__label">Add Your Voice</p>
+        <p class="support__statement">"I believe Vilimalé's future should be greener, not grayer."</p>
+        <form class="support__form" id="supportForm" name="funavaa-petition" method="POST" netlify>
+          <input type="hidden" name="form-name" value="funavaa-petition">
+          <div class="support__input-row">
+            <input type="text" class="support__input" id="supportName" name="name" placeholder="Your name" aria-label="Your name" autocomplete="off" required>
+            <button type="submit" class="support__btn" id="supportBtn">I Support This</button>
+          </div>
+        </form>
+        <div class="support__thanks" id="supportThanks">
+          <span class="support__thanks-icon">🌱</span>
+          <p class="support__thanks-text">Thank you for standing with FunaVaa.</p>
+        </div>
+        <p class="support__count" id="supportCount"><strong id="countNum">96</strong> people have added their voice</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <p class="footer__source">
+      All quotes from: <strong>Resilient Maldives 2045 — NDP Zero Draft, January 2026</strong><br>
+      <a href="ndp zero draft.docx" download style="color: var(--green-soft); font-size: 0.8rem; text-underline-offset: 3px;">Download the full NDP Zero Draft ↓</a>
+    </p>
+    <p class="footer__note">
+      This brief cites the Zero Draft. If the document is revised before adoption, verify that cited passages are retained.
+    </p>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <!-- ===== Scripts ===== -->
+  <script>
+    // ===== Scroll Animations =====
+    (function initScrollAnimations() {
+      const targets = document.querySelectorAll('.fade-in, .fade-in-left');
+      if (!window.IntersectionObserver) {
+        targets.forEach(function(el) { el.classList.add('visible'); });
+        return;
+      }
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      targets.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // ===== Hero Parallax =====
+    (function initParallax() {
+      var hero = document.getElementById('hero');
+      var leaves = hero.querySelector('.hero__leaves');
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      window.addEventListener('scroll', function() {
+        var scrolled = window.pageYOffset;
+        if (scrolled < window.innerHeight) {
+          leaves.style.transform = 'translateY(' + (scrolled * 0.3) + 'px)';
+        }
+      }, { passive: true });
+    })();
+
+    // ===== Toast =====
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function() { toast.classList.remove('show'); }, 2500);
+    }
+
+    // ===== Share Buttons =====
+    (function initShare() {
+      var pageUrl = 'https://vilimale.netlify.app/';
+      var shareText = "Regenerate, Don\u2019t Degrade \u2014 The National Development Plan promises a Maldives that restores its environment. Vilimal\u00e9\u2019s FunaVaa is where that promise is being tested.";
+
+      document.getElementById('shareWhatsApp').href =
+        'https://wa.me/?text=' + encodeURIComponent(shareText + ' ' + pageUrl);
+
+      document.getElementById('shareTwitter').href =
+        'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(pageUrl);
+
+      document.getElementById('shareFacebook').href =
+        'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl);
+
+      document.getElementById('shareCopy').addEventListener('click', function() {
+        navigator.clipboard.writeText(pageUrl).then(function() {
+          showToast('Link copied to clipboard \u2713');
+        }).catch(function() {
+          showToast('Could not copy link');
+        });
+      });
+    })();
+
+    // ===== Symbolic Support =====
+    (function initSupport() {
+      var STORAGE_KEY = 'funavaa_supporters';
+      var countEl = document.getElementById('countNum');
+      var form = document.getElementById('supportForm');
+      var thanks = document.getElementById('supportThanks');
+      var btn = document.getElementById('supportBtn');
+      var input = document.getElementById('supportName');
+      var BASELINE_COUNT = 96;
+
+      var supporters = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      countEl.textContent = BASELINE_COUNT + supporters.length;
+
+      // Fetch global submission count securely from our Netlify serverless function
+      fetch('/api/get-count')
+        .then(function(res) {
+          if (res.ok) return res.json();
+          throw new Error('Network response was not ok');
+        })
+        .then(function(data) {
+          if (data && typeof data.count === 'number') {
+            // Display either the real global count, or our local calculation, whichever is higher
+            countEl.textContent = Math.max(BASELINE_COUNT + supporters.length, data.count);
+          }
+        })
+        .catch(function(err) {
+          console.warn('Could not fetch global count, falling back to local count.', err);
+        });
+
+      if (localStorage.getItem('funavaa_supported')) {
+        form.classList.add('hidden');
+        thanks.classList.add('show');
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var name = input.value.trim();
+        if (!name) {
+          input.style.borderColor = '#e74c3c';
+          input.focus();
+          return;
+        }
+
+        btn.disabled = true;
+        input.disabled = true;
+        btn.textContent = 'Sending...';
+
+        // Submit form data using fetch to Netlify's built-in form handler
+        var body = new URLSearchParams(new FormData(form)).toString();
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body
+        })
+        .then(function() {
+          supporters.push({ name: name, date: new Date().toISOString() });
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(supporters));
+          localStorage.setItem('funavaa_supported', '1');
+          countEl.textContent = BASELINE_COUNT + supporters.length;
+          form.classList.add('hidden');
+          thanks.classList.add('show');
+          showToast('🌱 Thank you, ' + name + '!');
+        })
+        .catch(function(err) {
+          console.error(err);
+          // Fallback to local-only submission if network fails
+          supporters.push({ name: name, date: new Date().toISOString() });
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(supporters));
+          localStorage.setItem('funavaa_supported', '1');
+          countEl.textContent = BASELINE_COUNT + supporters.length;
+          form.classList.add('hidden');
+          thanks.classList.add('show');
+          showToast('🌱 Thank you, ' + name + '!');
+        });
+      });
+
+      input.addEventListener('input', function() {
+        input.style.borderColor = '';
+      });
+    })();
+  </script>
+
+</body>
+</html>
