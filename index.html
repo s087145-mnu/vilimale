@@ -536,6 +536,7 @@
 
     .support__input-row {
       display: flex;
+      flex-direction: column;
       gap: var(--space-xs);
     }
 
@@ -883,6 +884,8 @@
           <input type="hidden" name="form-name" value="funavaa-petition">
           <div class="support__input-row">
             <input type="text" class="support__input" id="supportName" name="name" placeholder="Your name" aria-label="Your name" autocomplete="off" required>
+            <input type="tel" class="support__input" id="supportPhone" name="phone" placeholder="Phone number" aria-label="Phone number" autocomplete="off" required>
+            <input type="text" class="support__input" id="supportConstituency" name="constituency" placeholder="Constituency (e.g. Vilimalé)" aria-label="Constituency" autocomplete="off" required>
             <button type="submit" class="support__btn" id="supportBtn">I Support This</button>
           </div>
         </form>
@@ -981,6 +984,8 @@
       var thanks = document.getElementById('supportThanks');
       var btn = document.getElementById('supportBtn');
       var input = document.getElementById('supportName');
+      var phoneInput = document.getElementById('supportPhone');
+      var constituencyInput = document.getElementById('supportConstituency');
       var BASELINE_COUNT = 0;
       var globalCount = 0;
 
@@ -1012,9 +1017,22 @@
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         var name = input.value.trim();
+        var phone = phoneInput.value.trim();
+        var constituency = constituencyInput.value.trim();
+
         if (!name) {
           input.style.borderColor = '#e74c3c';
           input.focus();
+          return;
+        }
+        if (!phone) {
+          phoneInput.style.borderColor = '#e74c3c';
+          phoneInput.focus();
+          return;
+        }
+        if (!constituency) {
+          constituencyInput.style.borderColor = '#e74c3c';
+          constituencyInput.focus();
           return;
         }
 
@@ -1023,6 +1041,8 @@
 
         btn.disabled = true;
         input.disabled = true;
+        phoneInput.disabled = true;
+        constituencyInput.disabled = true;
         btn.textContent = 'Sending...';
 
         // Submit form data using fetch to Netlify's built-in form handler
@@ -1033,7 +1053,7 @@
           body: body
         })
         .then(function() {
-          supporters.push({ name: name, date: new Date().toISOString() });
+          supporters.push({ name: name, phone: phone, constituency: constituency, date: new Date().toISOString() });
           localStorage.setItem(STORAGE_KEY, JSON.stringify(supporters));
           localStorage.setItem('funavaa_supported', '1');
           
@@ -1048,7 +1068,7 @@
         .catch(function(err) {
           console.error(err);
           // Fallback to local-only submission if network fails
-          supporters.push({ name: name, date: new Date().toISOString() });
+          supporters.push({ name: name, phone: phone, constituency: constituency, date: new Date().toISOString() });
           localStorage.setItem(STORAGE_KEY, JSON.stringify(supporters));
           localStorage.setItem('funavaa_supported', '1');
           countEl.textContent = BASELINE_COUNT + supporters.length;
@@ -1058,9 +1078,9 @@
         });
       });
 
-      input.addEventListener('input', function() {
-        input.style.borderColor = '';
-      });
+      input.addEventListener('input', function() { input.style.borderColor = ''; });
+      phoneInput.addEventListener('input', function() { phoneInput.style.borderColor = ''; });
+      constituencyInput.addEventListener('input', function() { constituencyInput.style.borderColor = ''; });
     })();
   </script>
 
