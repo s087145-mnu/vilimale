@@ -603,6 +603,29 @@
       display: block;
     }
 
+    .support__reset-btn {
+      margin-top: var(--space-sm);
+      background: none;
+      border: 1px solid var(--green-canopy);
+      color: var(--green-forest);
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition-base), color var(--transition-base), transform var(--transition-base);
+    }
+
+    .support__reset-btn:hover {
+      background: var(--green-pale);
+      transform: translateY(-1px);
+    }
+
+    .support__reset-btn:active {
+      transform: translateY(0);
+    }
+
     .support__thanks-icon {
       font-size: 2.5rem;
       margin-bottom: var(--space-xs);
@@ -892,6 +915,7 @@
         <div class="support__thanks" id="supportThanks">
           <span class="support__thanks-icon">🌱</span>
           <p class="support__thanks-text">Thank you for standing with FunaVaa.</p>
+          <button type="button" class="support__reset-btn" id="supportResetBtn">Submit another response</button>
         </div>
         <p class="support__count" id="supportCount"><strong id="countNum">0</strong> people have added their voice</p>
       </div>
@@ -986,6 +1010,7 @@
       var input = document.getElementById('supportName');
       var phoneInput = document.getElementById('supportPhone');
       var constituencyInput = document.getElementById('supportConstituency');
+      var resetBtn = document.getElementById('supportResetBtn');
       var BASELINE_COUNT = 0;
       var globalCount = 0;
 
@@ -1081,6 +1106,21 @@
       input.addEventListener('input', function() { input.style.borderColor = ''; });
       phoneInput.addEventListener('input', function() { phoneInput.style.borderColor = ''; });
       constituencyInput.addEventListener('input', function() { constituencyInput.style.borderColor = ''; });
+
+      resetBtn.addEventListener('click', function() {
+        localStorage.removeItem('funavaa_supported');
+        form.reset();
+        
+        // Re-enable inputs
+        input.disabled = false;
+        phoneInput.disabled = false;
+        constituencyInput.disabled = false;
+        btn.disabled = false;
+        btn.textContent = 'I Support This';
+        
+        thanks.classList.remove('show');
+        form.classList.remove('hidden');
+      });
     })();
   </script>
 
