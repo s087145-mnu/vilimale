@@ -890,7 +890,7 @@
           <span class="support__thanks-icon">🌱</span>
           <p class="support__thanks-text">Thank you for standing with FunaVaa.</p>
         </div>
-        <p class="support__count" id="supportCount"><strong id="countNum">96</strong> people have added their voice</p>
+        <p class="support__count" id="supportCount"><strong id="countNum">0</strong> people have added their voice</p>
       </div>
     </div>
   </section>
@@ -952,7 +952,7 @@
 
     // ===== Share Buttons =====
     (function initShare() {
-      var pageUrl = 'https://vilimale.netlify.app/';
+      var pageUrl = 'https://villingili.netlify.app/';
       var shareText = "Regenerate, Don\u2019t Degrade \u2014 The National Development Plan promises a Maldives that restores its environment. Vilimal\u00e9\u2019s FunaVaa is where that promise is being tested.";
 
       document.getElementById('shareWhatsApp').href =
@@ -981,7 +981,8 @@
       var thanks = document.getElementById('supportThanks');
       var btn = document.getElementById('supportBtn');
       var input = document.getElementById('supportName');
-      var BASELINE_COUNT = 96;
+      var BASELINE_COUNT = 0;
+      var globalCount = 0;
 
       var supporters = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
       countEl.textContent = BASELINE_COUNT + supporters.length;
@@ -994,8 +995,9 @@
         })
         .then(function(data) {
           if (data && typeof data.count === 'number') {
-            // Display either the real global count, or our local calculation, whichever is higher
-            countEl.textContent = Math.max(BASELINE_COUNT + supporters.length, data.count);
+            globalCount = data.count;
+            // Display baseline + actual global count
+            countEl.textContent = BASELINE_COUNT + globalCount;
           }
         })
         .catch(function(err) {
@@ -1016,12 +1018,15 @@
           return;
         }
 
+        // Retrieve the form data before disabling the inputs (disabled fields are ignored by FormData)
+        var formData = new FormData(form);
+
         btn.disabled = true;
         input.disabled = true;
         btn.textContent = 'Sending...';
 
         // Submit form data using fetch to Netlify's built-in form handler
-        var body = new URLSearchParams(new FormData(form)).toString();
+        var body = new URLSearchParams(formData).toString();
         fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -1031,7 +1036,11 @@
           supporters.push({ name: name, date: new Date().toISOString() });
           localStorage.setItem(STORAGE_KEY, JSON.stringify(supporters));
           localStorage.setItem('funavaa_supported', '1');
-          countEl.textContent = BASELINE_COUNT + supporters.length;
+          
+          // Increment the count immediately on screen
+          globalCount += 1;
+          countEl.textContent = BASELINE_COUNT + globalCount;
+          
           form.classList.add('hidden');
           thanks.classList.add('show');
           showToast('🌱 Thank you, ' + name + '!');
